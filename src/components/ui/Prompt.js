@@ -1,6 +1,6 @@
-const React = require('react')
+import React from 'react'
 
-module.exports = 
-    function Prompt() {
-        return <div className="prompt">text</div>
+
+export default function Prompt() {
+    return <div className="prompt">text</div>
 }
