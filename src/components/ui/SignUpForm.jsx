@@ -44,7 +44,7 @@ export default function SignUpForm(props) {
                 placeholder={"password"} 
                 onChange={handleChange.bind({type: password})} 
             />
-            <button role="submit"></button>
+            <button role="submit">Sign Up</button>
         </form>
 
     )
