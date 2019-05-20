@@ -1,4 +1,4 @@
-module Main exposing (Model, Msg(..), init, main, update, view, viewInput, viewValidation)
+module Form exposing (Model, Msg(..), init, main, update, view, viewInput, viewValidation)
 
 import Browser
 import Html exposing (..)
