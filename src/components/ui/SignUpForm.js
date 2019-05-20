@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
 
-export default function SignUpForm() {
+export default function SignUpForm(props) {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
 
 
     function handleSubmit(e) {
         e.preventDefault()
-
+        // props.dispatch({ type: NewUser, payload: { email, password } })
+        return {
+            email,
+            password
+        }
     }
 
     function handleChange(action, {target:{value}}) {
