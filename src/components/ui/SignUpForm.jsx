@@ -36,13 +36,13 @@ export default function SignUpForm(props) {
                 name="email"
                 value={email} 
                 placeholder={"email"} 
-                onChange={handleChange.bind({type: email})} 
+                onChange={handleChange.bind({type: "email"})} 
             />
             <input 
                 name="password"
                 value={password} 
                 placeholder={"password"} 
-                onChange={handleChange.bind({type: password})} 
+                onChange={handleChange.bind({type: "password"})} 
             />
             <button role="submit">Sign Up</button>
         </form>
