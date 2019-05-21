@@ -17,11 +17,13 @@ export default function Button(props) {
                 </button>
             )
         ))
-        :  <button className={css(
+        : <button className={css(
             (props.styles)
               ? { ...props.styles }
               : { color: props.color || "blue" }
-            )}>{props.text || "Click me"}</button>
+            )}>
+              {props.text || "Click me"}
+          </button>
     }
     </> 
   )
