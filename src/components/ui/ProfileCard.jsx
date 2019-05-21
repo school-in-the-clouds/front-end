@@ -1,12 +1,13 @@
 import React from 'react'
 
 import Elm from 'react-elm-components'
-import { Profile } from '../web/Profile'
+// import { Profile } from '../web/elm/Profile'
 
 export default function ProfileCard(props) {
     return (
         <div>
-            <Elm src={Profile} flags={[...props]}></Elm>
+            Profile
+            {/* <Elm src={Profile}></Elm> */}
         </div>
     )
 }
