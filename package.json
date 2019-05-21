@@ -81,6 +81,7 @@
     ]
   },
   "devDependencies": {
+    "elm-webpack-loader": "^5.0.0",
     "jsonwebtoken": "^8.5.1",
     "react-elm-components": "^1.1.0",
     "styletron-engine-atomic": "^1.1.2",
@@ -124,7 +125,8 @@
       "json",
       "web.jsx",
       "jsx",
-      "node"
+      "node",
+      "elm"
     ],
     "watchPlugins": [
       "jest-watch-typeahead/filename",
