@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 
 export default function SignUpForm(props) {
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
 
 
-    function handleSubmit(e) {
+    const handleSubmit = (e) => {
         e.preventDefault()
         // props.dispatch({ type: NewUser, payload: { email, password } })
         return {
@@ -14,16 +14,16 @@ export default function SignUpForm(props) {
         }
     }
 
-    function handleChange(action, {target:{value}}) {
-        switch(action.type) {
+    const handleChange = (field) => (e) => {
+        switch(field) {
             case 'email':
-                setEmail(value)
+                setEmail(e.target.value)
                 break
             case 'password':
-                setPassword(value)
+                setPassword(e.target.value)
                 break
             default: 
-                console.warn('could not handle change for', value)
+                console.warn('could not handle change for', e.target.value)
         }
     }
     
@@ -36,13 +36,13 @@ export default function SignUpForm(props) {
                 name="email"
                 value={email} 
                 placeholder={"email"} 
-                onChange={handleChange.bind({type: "email"})} 
+                onChange={handleChange("email")} 
             />
             <input 
                 name="password"
                 value={password} 
                 placeholder={"password"} 
-                onChange={handleChange.bind({type: "password"})} 
+                onChange={handleChange("password")} 
             />
             <button role="submit">Sign Up</button>
         </form>
