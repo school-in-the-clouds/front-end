@@ -7,11 +7,17 @@ export default function SignUpForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
+        // use useEffect to make POST request to register/login route 
         // props.dispatch({ type: NewUser, payload: { email, password } })
+
+        // reset fields
+        setEmail('')
+        setPassword('')
         return {
             email,
             password
         }
+      
     }
 
     const handleChange = (field) => (e) => {
