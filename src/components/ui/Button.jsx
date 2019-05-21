@@ -1,28 +1,47 @@
 import React from 'react'
 import { useStyletron } from "styletron-react"
 
-export default function Button(props) {
+const defaultProps= { 
+  text: '',
+  color: 'black', 
+  quantity: new Array(1), 
+  styles:[] 
+}
+
+export default function Button({
+  text, 
+  quantity, 
+  styles, 
+  color
+}=defaultProps) {
+  // styletron css hook
   const [css] = useStyletron()
+
+  function renderBtn(btn, i) {
+    return (
+      <button 
+        key={i}
+        className={css(
+          (styles)
+            ? { ...styles }
+            : { color: color || "blue" }
+        )}>
+          {text || ""}
+      </button>
+    )
+}
   
+  // for amount specificied in quanity, render a button
   return (
     <>
-    { (props.quantity)
-        ? props.quantity.map((x => (
-                <button className={css(
-                  (props.styles)
-                    ? { ...props.styles }
-                    : { color: props.color || "blue" }
-                  )}>
-                    {props.text || ""}
-                </button>
-            )
-        ))
+    { (quantity)
+        ? quantity.map(renderBtn)
         : <button className={css(
-            (props.styles)
-              ? { ...props.styles }
-              : { color: props.color || "blue" }
+            (styles)
+              ? { ...styles }
+              : { color: color || "blue" }
             )}>
-              {props.text || "Click me"}
+              {text || "Click me"}
           </button>
     }
     </> 
