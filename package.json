@@ -30,6 +30,8 @@
   },
   "devDependencies": {
     "jsonwebtoken": "^8.5.1",
-    "react-elm-components": "^1.1.0"
+    "react-elm-components": "^1.1.0",
+    "styletron-engine-atomic": "^1.1.2",
+    "styletron-react": "^5.0.1"
   }
 }
