@@ -10,12 +10,9 @@ import Nav from './components/ui/Nav.jsx'
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
       <Nav logo={logo} />
-      </header>
-      <Prompt message={"Hi, is this your first time here?" +  "Y/N"}  />
+      <Prompt message={"Hi, is this your first time here?"}  />
       <SignUpForm />
-      
     </div>
   );
 }
