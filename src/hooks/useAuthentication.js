@@ -1,19 +1,21 @@
 import { useReducer, useEffect } from 'react'
 
-const defaultRegisrationData = {
-    username: "jane doe",
-    password: "password",
-    country: "USA",
-    name: "Jane",
-    role: "admin",
-    email: "test@test.com",
-    phone: "1111111111"
-}
+// Registration Data Shape
+// {
+//     username: "jane doe",
+//     password: "password",
+//     country: "USA",
+//     name: "Jane",
+//     role: "admin",
+//     email: "test@test.com",
+//     phone: "1111111111"
+// }
 
-const defaultLoginData = {
-    username: "jane doe",
-    password: "password"
-}
+// Login Data Shape 
+// {
+//     username: "jane doe",
+//     password: "password"
+// }
 
 
 function authReducer(state, action) {
@@ -23,17 +25,18 @@ function authReducer(state, action) {
     }
 }
 
-export default function useAuthentication(isExistingUser=false, userInfo=defaultRegisrationData) {
+// useAuthentication: Bool -> [Func, Func, Func]
+export default function useAuthentication(isExistingUser=false) {
     // TODO: validate data before forwarding it
     const [loginStatus, dispatchLoginStatus] = useReducer(authReducer, {
-        body: userInfo,
+        body: {},
         attempts: 0,
+        attemptingLogin: false,
         loggedIn: false,
         errors: [],
         authKey: localStorage.getItem('school-in-the-cloud-auth-key')
     })
-   
-    // returns a Promise
+    
     return useEffect(() => {
         if (isExistingUser) {
             // logging in...
@@ -48,15 +51,23 @@ export default function useAuthentication(isExistingUser=false, userInfo=default
         
                     // display error messages if there are any (ex: password too short)
                     // so something like... errors.map(renderError)
-                    return [loginStatus, dispatchLoginStatus, new Promise(loginUser)]
+                    return [loginUser, loginStatus, dispatchLoginStatus]
                 }
         } else {
             // registering...
-            return [loginStatus, dispatchLoginStatus, new Promise(registerUser)]
+            return [registerUser, loginStatus, dispatchLoginStatus]
         }
     }, [])
+}
 
-    function registerUser(resolve, reject) {
+/*
+    The two functions below return a promise containing 
+    the server response from the attmepted login
+*/
+
+// registerUser:  Obj -> Promise
+function registerUser(userInfo) {
+    return new Promise((resolve, reject) => {
         fetch("https://school-itc.herokuapp.com/api/accounts/register",{
             method: 'POST',        
             headers: { 'Content-Type': 'application/json' },
@@ -65,10 +76,12 @@ export default function useAuthentication(isExistingUser=false, userInfo=default
         .then(res => res.json())
         .then(json => resolve(json))
         .catch(err => reject(err))
-    }
-    
-    
-    function loginUser(resolve, reject) {
+    })
+}
+
+// loginUser: Obj -> Promise
+function loginUser(userInfo) {
+    return new Promise ((resolve, reject) => {
         fetch("https://school-itc.herokuapp.com/api/accounts/login", {
             method: 'POST',
             headers: { 'Content-Type': 'applicatoin/json' },
@@ -77,5 +90,5 @@ export default function useAuthentication(isExistingUser=false, userInfo=default
         .then(res => res.json())
         .then(json => resolve(json))
         .catch(err => reject(err))
-    }
+    })
 }
