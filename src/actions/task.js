@@ -2,7 +2,8 @@
  * Admins can perform CRUD operations on tasks.
  */
 
-// TODO: fetch data w/ axios and use dispatch
+
+import axios from 'axios'
 
 
 // CREATE
@@ -24,11 +25,26 @@ export const GET_TASK_INIT = "GET_TASK_INIT"
 export const GET_TASK_SUCCESS = "GET_TASK_SUCCESS"
 export const GET_TASK_FAILURE = "GET_TASK_FAILURE"
 
-export const getTask = (task) => (dispatch) => 
-    ({
-        type: GET_TASK_INIT,
-        payload: task
+export const getTaskByVolunteer = (authToken, volunteerId) => (dispatch) => {
+    // TODO: use useContext to pull auth token off local storage
+    dispatch({ type: GET_TASK_INIT })
+    axios.get(`https://school-itc.herokuapp.com/api/tasks/byVolunteer/${volunteerId}`, {
+        "Content-Type": 'application/json',
+        authorization: authToken
     })
+    .then(res => {
+        dispatch({
+            type: GET_TASK_SUCCESS,
+            payload: res
+        })
+    })
+    .catch(err => {
+        dispatch({
+            type: GET_TASK_FAILURE,
+            payload: err
+        })
+    })
+}
 
 export const GET_ALL_TASKS_INIT = "GET_ALL_TASKS_INIT"
 export const GET_ALL_TASKS_SUCCESS = "GET_ALL_TASKS_SUCCESS"
