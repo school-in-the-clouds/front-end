@@ -1,4 +1,8 @@
-// students can view tasks, search volunteers, or schecule appointments
+/** 
+ * Students can view tasks, search volunteers, or schecule appointments.
+ */
+
+
 // TODO: fetch data w/ axios and use dispatch
 
 // viewing of tasks is handled in "./task.js"

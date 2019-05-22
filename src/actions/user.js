@@ -1,4 +1,10 @@
-// users can edit their username or password
+/** 
+ * Users can edit their username or password.
+ */
+
+
+import axios from 'axios'
+
 
 export const EDIT_PASSWORD_INIT = "EDIT_PASSWORD_INIT"
 export const EDIT_PASSWORD_SUCCESS = "EDIT_PASSWORD_SUCCESS"

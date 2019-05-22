@@ -1,4 +1,7 @@
-// admins can perform CRUD operations on tasks
+/**
+ * Admins can perform CRUD operations on tasks.
+ */
+
 // TODO: fetch data w/ axios and use dispatch
 
 

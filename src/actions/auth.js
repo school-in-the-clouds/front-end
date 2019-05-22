@@ -1,3 +1,8 @@
+/**
+ * Authenticate users by either logging them in or signing them up.
+ */
+
+
 import axios from 'axios'
 
 

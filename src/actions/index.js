@@ -1,4 +1,7 @@
-// export all the things!
+/**
+ *  export all the things!
+ */ 
+
 
 export * from './auth'
 export * from '.user'
