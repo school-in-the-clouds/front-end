@@ -5,8 +5,10 @@
 
 import axios from 'axios'
 
+// TODO: use ramda to curry action creators
 
-// CREATE
+
+//  ---- CREATE ----
 
 export const ADD_TASK_INIT = "ADD_TASK_INIT"
 export const ADD_TASK_SUCCESS = "ADD_TASK_SUCCESS"
@@ -19,19 +21,41 @@ export const addTask = (newTask) => (dispatch) =>
     })
 
 
-// READ 
+
+
+//  ---- READ ----
 
 export const GET_TASK_INIT = "GET_TASK_INIT"
 export const GET_TASK_SUCCESS = "GET_TASK_SUCCESS"
 export const GET_TASK_FAILURE = "GET_TASK_FAILURE"
 
+export const getTaskById = (authToken, taskId) => (dispatch) => {
+    dispatch({ type: GET_TASK_INIT })
+    axios.get(
+        `https://school-itc.herokuapp.com/api/tasks/${taskId}`, 
+        craftHeader(authToken)
+    )
+    .then(res => {
+        dispatch({ 
+            type: GET_TASK_SUCCESS,
+            payload: res
+        })
+    })
+    .catch(err => {
+        dispatch({
+            type: GET_TASK_FAILURE,
+            payload: err
+        })
+    })
+}
+
 export const getTaskByVolunteer = (authToken, volunteerId) => (dispatch) => {
     // TODO: use useContext to pull auth token off local storage
     dispatch({ type: GET_TASK_INIT })
-    axios.get(`https://school-itc.herokuapp.com/api/tasks/byVolunteer/${volunteerId}`, {
-        "Content-Type": 'application/json',
-        authorization: authToken
-    })
+    axios.get(
+        `https://school-itc.herokuapp.com/api/tasks/byVolunteer/${volunteerId}`,
+        craftHeader(authToken) 
+    )
     .then(res => {
         dispatch({
             type: GET_TASK_SUCCESS,
@@ -54,7 +78,9 @@ export const getAllTasks = () => (dispatch) =>
     ({ type: GET_ALL_TASKS_INIT })
 
 
-// UPDATE
+
+
+//  ---- UPDATE ---- 
 
 export const EDIT_TASK_INIT = "EDIT_TASK_INIT"
 export const EDIT_TASK_SUCCESS = "EDIT_TASK_SUCCESS"
@@ -78,7 +104,9 @@ export const markComplete = (task) => (dispatch) =>
     })
 
 
-// DELETE
+
+
+//  ---- DELETE ----
 
 export const DELETE_TASK_INIT = "DELETE_TASK_INIT"
 export const DELETE_TASK_SUCCESS = "DELETE_TASK_SUCCESS"
@@ -89,3 +117,13 @@ export const deleteTask = (task) => (disptach) =>
         type: DELETE_TASK_INIT,
         payload: task
     })
+
+
+
+
+// HELPERS
+    
+// abstract the common boilerplate of passing an authToken as a request header
+function craftHeader(authToken, ...extraHeaders) {
+    return Object.assign({}, { authorization: authToken }, ...extraHeaders)
+}
