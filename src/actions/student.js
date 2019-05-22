@@ -1,20 +1,9 @@
 /** 
- * Students can view tasks, search volunteers, or schecule appointments.
+ * Students can view tasks, search tasks by volunteer, or schedule appointments.
  */
 
-
-// TODO: fetch data w/ axios and use dispatch
-
 // viewing of tasks is handled in "./task.js"
-
-export const FETCH_VOLUNTEERS_INIT = "FETCH_VOLUNTEERS_INIT"
-export const FETCH_VOLUNTEERS_SUCCESS = "FETCH_VOLUNTEERS_SUCCESS"
-export const FETCH_VOLUNTEERS_FAILURE = "FETCH_VOLUNTEERS_FAILURE"
-
-export const getListOfVolunteers = () => (dispatch) => 
-    ({ 
-        type: FETCH_VOLUNTEERS_INIT 
-    })
+// searching of tasks is also handled in "./task.js"
 
 // SEARCH (BY AVAILABLE TIMES OR COUNTRY)
 
@@ -22,10 +11,13 @@ export const SEARCH_INIT = "SEARCH_INIT"
 export const SEARCH_SUCCESS = "SEARCH_SUCCESS"
 export const SEARCH_FAILURE = "SEARCH_FAILURE"
 
-export const searchBy = (filter, term) => 
-    ({
-        type: SEARCH_INIT,
-        payload: [filter, term]
-    })
+export const searchByCountry = (authToken, country) => (dispatch) => {
+    dispatch({ type: SEARCH_INIT })
+    // this endpoint isn't set up yet, so let's intentionally deny this request
+    setTimeout(() => {
+        dispatch({ type: SEARCH_FAILURE })
+    }, 500)
+    
+}
 
 // STRETCH: SCHEDULE TIME TO WORK WITH VOLUNTEER
