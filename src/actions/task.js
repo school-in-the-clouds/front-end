@@ -3,10 +3,30 @@
  */
 
 
+/* 
+    Note: All action creators with 2+ params can be optionally curried, 
+    meaning you can presupply them with an authToken once and then reuse that function 
+    each time you need to trigger that specific action.
+    Ex:
+        let addTaskShortcut = addTask(usersToken)
+        // returns a curried function (similar to Array.prototype.bind)
+
+        addTaskShortcut(task1)
+        addTaskShortcut(task2)
+        addTaskShortcut(task3)
+        ... 
+
+    By utilizing this technique, all of our action creators essentially look like this:
+        const addTask = authToken => newTask => dispatch
+
+    However, the cool thing about Ramda's curry utility is that it's completely optional, 
+    so you can still supply all your arguments up-front if you prefer -- like this:
+        addTask(usersToken, task1)
+*/
+
 import axios from 'axios'
 import { curry } from 'ramda'
 
-// TODO: use ramda to curry action creators
 // TODO: use useContext to pull auth token off local storage (instead of resorting to optional currying)
 
 
