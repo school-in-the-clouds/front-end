@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import { Provider as ReduxProvider } from 'react-redux'
+import store from './store'
+
 import { Provider as StyletronProvider } from "styletron-react";
 import { Client as Styletron } from "styletron-engine-atomic";
 import { BrowserRouter as Router } from 'react-router-dom'
@@ -10,15 +13,16 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// 1. Create a client engine instance
 const engine = new Styletron();
 
 ReactDOM.render(
-<StyletronProvider value={engine}>
+<ReduxProvider store={store}>
     <Router>
-        <App />
+        <StyletronProvider value={engine}>
+            <App />
+        </StyletronProvider>
     </Router>
-</StyletronProvider>
+</ReduxProvider>
 , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
