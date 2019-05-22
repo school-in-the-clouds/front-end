@@ -6,6 +6,8 @@
 import axios from 'axios'
 
 // TODO: use ramda to curry action creators
+// TODO: use useContext to pull auth token off local storage (instead of resorting to optional currying)
+
 
 
 //  ---- CREATE ----
@@ -50,8 +52,8 @@ export const getTaskById = (authToken, taskId) => (dispatch) => {
 }
 
 export const getTaskByVolunteer = (authToken, volunteerId) => (dispatch) => {
-    // TODO: use useContext to pull auth token off local storage
     dispatch({ type: GET_TASK_INIT })
+
     axios.get(
         `https://school-itc.herokuapp.com/api/tasks/byVolunteer/${volunteerId}`,
         craftHeader(authToken) 
@@ -74,8 +76,26 @@ export const GET_ALL_TASKS_INIT = "GET_ALL_TASKS_INIT"
 export const GET_ALL_TASKS_SUCCESS = "GET_ALL_TASKS_SUCCESS"
 export const GET_ALL_TASKS_FAILURE = "GET_ALL_TASKS_FAILURE"
 
-export const getAllTasks = () => (dispatch) => 
-    ({ type: GET_ALL_TASKS_INIT })
+export const getAllTasks = (authToken) => (dispatch) => {
+    dispatch({ type: GET_ALL_TASKS_INIT })
+
+    axios.get(
+        "https://school-itc.herokuapp.com/api/tasks", 
+        craftHeader(authToken)
+    )
+    .then(res => {
+        dispatch({
+            type: GET_ALL_TASKS_SUCCESS,
+            payload: res
+        })
+    })
+    .catch(err => {
+        dispatch({
+            type: GET_ALL_TASKS_FAILURE,
+            payload: err
+        })
+    })
+}
 
 
 
