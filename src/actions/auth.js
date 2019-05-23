@@ -15,12 +15,13 @@ export const LOG_IN_FAILURE = "LOG_IN_FAILURE"
 // loginUser: Obj -> (x -> void) -> void
 export const loginUser = (userInfo) => (dispatch) => {
     dispatch({ type: SIGN_UP_INIT })
-
+    
     axios.post("https://school-itc.herokuapp.com/api/accounts/login", userInfo)
     .then(res => {
+        localStorage.setItem("school-in-the-cloud-auth-key", res.data.token)
          dispatch({
             type: SIGN_UP_SUCCESS,
-            payload: res
+            payload: res.data.token
         })
     })
      .catch(err => { 
@@ -45,12 +46,7 @@ export const registerUser = (userInfo) => (dispatch) => {
 
     axios.post("https://school-itc.herokuapp.com/api/accounts/register", userInfo)
     .then(res => {
-        localStorage.setItem("school-in-the-cloud-auth-key", res.data.token)
-        
-        dispatch({
-            type: SIGN_UP_SUCCESS,
-            payload: res
-        })
+        dispatch({ type: SIGN_UP_SUCCESS })
     })
     .catch(err => { 
         dispatch({
