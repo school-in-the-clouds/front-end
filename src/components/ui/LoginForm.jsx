@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
 const initialState = {
-    name: '',
-    email: ''
+    username: '',
+    password: ''
 }
 
 export default class LoginForm extends Component {
@@ -19,7 +19,7 @@ export default class LoginForm extends Component {
 
     handleChange = (e) => {
         this.setState({
-            [e.target.name]: [e.target.value]
+            [e.target.name]: e.target.value
         })
     }
     
@@ -27,9 +27,9 @@ export default class LoginForm extends Component {
         return (
             <form className="login-form" onSubmit={this.handleSubmit}>
                 <input 
-                    name="email"
-                    value={this.state.email} 
-                    placeholder={"email"} 
+                    name="username"
+                    value={this.state.username} 
+                    placeholder={"username"} 
                     onChange={this.handleChange} 
                     required
                 />
