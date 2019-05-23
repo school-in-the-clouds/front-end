@@ -15,6 +15,7 @@ export const LOG_IN_FAILURE = "LOG_IN_FAILURE"
 // loginUser: Obj -> (x -> void) -> void
 export const loginUser = (userInfo) => (dispatch) => {
     dispatch({ type: SIGN_UP_INIT })
+
     axios.post("https://school-itc.herokuapp.com/api/accounts/login", userInfo)
     .then(res => {
          dispatch({
@@ -41,6 +42,7 @@ export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE"
 // registerUser:  Obj -> (x -> void) -> void
 export const registerUser = (userInfo) => (dispatch) => {
     dispatch({ type: SIGN_UP_INIT })
+    
     axios.post("https://school-itc.herokuapp.com/api/accounts/register", userInfo)
     .then(res => {
         dispatch({
