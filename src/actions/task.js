@@ -39,6 +39,7 @@ export const ADD_TASK_FAILURE = "ADD_TASK_FAILURE"
 
 export const addTask = curry((authToken, newTask) => (dispatch) => {
     dispatch({ type: ADD_TASK_INIT })
+    
     axios.post(
         "https://school-itc.herokuapp.com/api/tasks", 
         newTask, 
@@ -70,6 +71,7 @@ export const GET_TASK_FAILURE = "GET_TASK_FAILURE"
 
 export const getTaskById = curry((authToken, taskId) => (dispatch) => {
     dispatch({ type: GET_TASK_INIT })
+    
     axios.get(
         `https://school-itc.herokuapp.com/api/tasks/${taskId}`, 
         craftHeader(authToken)
@@ -145,6 +147,7 @@ export const EDIT_TASK_FAILURE = "EDIT_TASK_FAILURE"
 
 export const editTask = curry((authToken, task) => (dispatch) => {
     dispatch ({ type: EDIT_TASK_INIT })
+
     axios.put(
         `https://school-itc.herokuapp.com/api/tasks/${task.id}`,
         task,
@@ -171,6 +174,23 @@ export const MARK_COMPLETE_FAILURE = "MARK_COMPLETE"
 
 export const markComplete = curry((authToken, task) => (dispatch) => {
     dispatch({ type: MARK_COMPLETE_INIT })
+
+    axios.put(
+        `https://school-itc.herokuapp.com/api/tasks/${task.id}`,
+        [task].map(task => task.completed = true),
+        craftHeader(authToken)
+    ).then(res => {
+        dispatch({
+            type: MARK_COMPLETE_SUCCESS,
+            payload: res
+        })
+    })
+    .catch(err => {
+        dispatch({
+            type: MARK_COMPLETE_FAILURE,
+            payload: err
+        })
+    })
     dispatch({ type: MARK_COMPLETE_FAILURE })
 })
 
