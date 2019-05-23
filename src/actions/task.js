@@ -202,8 +202,12 @@ export const DELETE_TASK_INIT = "DELETE_TASK_INIT"
 export const DELETE_TASK_SUCCESS = "DELETE_TASK_SUCCESS"
 export const DELETE_TASK_FAILURE = "DELETE_TASK_FAILURE"
 
-export const deleteTask = curry((authToken, task) => (dispatch) => {
+export const deleteTask = curry((authToken, taskId) => (dispatch) => {
     dispatch({ type: DELETE_TASK_INIT })
+    axios.delete(
+        `https://school-itc.herokuapp.com/api/tasks/${taskId}`,
+        craftHeader(authToken)
+    )
     dispatch({ type: DELETE_TASK_FAILURE })
 })
 
