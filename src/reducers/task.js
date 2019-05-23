@@ -10,10 +10,8 @@ import {
 
 const initialState = {
     fetching: false,
-    errors: [],
-    authToken: localStorage.getItem('school-in-the-cloud-auth-key'),
-    
-    results: [],
+    error: null,
+    tasks: [],
 }
 
 

@@ -6,9 +6,7 @@ import {
 
 const initialState = {
     fetching: false,
-    errors: [],
-    authToken: localStorage.getItem('school-in-the-cloud-auth-key'),
-
+    error: null,
     oldUsername: "",
     oldPassword: "",
     currentUsername: "", 
