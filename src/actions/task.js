@@ -179,5 +179,10 @@ export const deleteTask = curry((authToken, task) => (dispatch) => {
     
 // abstract the common boilerplate of passing an authToken as a request header
 function craftHeader(authToken, ...extraHeaders) {
-    return Object.assign({}, { authorization: authToken }, ...extraHeaders)
+    const boilerplate = {
+        "Content-Type": "application/json",
+        authorization: authToken,
+    }
+    
+    return Object.assign({}, boilerplate, ...extraHeaders)
 }
