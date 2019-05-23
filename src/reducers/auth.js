@@ -1,5 +1,5 @@
 import { 
-    LOG_IN_INIT, LOG_IN_SUCCESS, LOG_IN_FAILURE,
+    LOGIN_INIT, LOGIN_SUCCESS, LOGIN_FAILURE,
     SIGN_UP_INIT, SIGN_UP_SUCCESS, SIGN_UP_FAILURE
 } from '../actions'
 
@@ -17,12 +17,12 @@ const initialState = {
 
 export default function userReducer(state=initialState, action) {
     switch(action.type) {
-        case LOG_IN_INIT:
+        case LOGIN_INIT:
             return {
                 ...state, 
                 fetching: true
             }
-        case LOG_IN_SUCCESS:
+        case LOGIN_SUCCESS:
             const { token, role, name, id } = action.payload
 
             return {
@@ -35,7 +35,7 @@ export default function userReducer(state=initialState, action) {
                 role,
                 authToken: token,
             }
-        case LOG_IN_FAILURE:
+        case LOGIN_FAILURE:
             return {
                 ...state,
                 fetching: false,

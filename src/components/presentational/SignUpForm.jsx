@@ -18,7 +18,7 @@ export default class SignUpForm extends Component {
         e.preventDefault()
 
         // TODO: grab auth token off context, not props
-        this.props.registerUser(this.props.authToken, this.state)
+        this.props.registerUser(this.state)
         
         // reset fields
         this.setState(initialState)
