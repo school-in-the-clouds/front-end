@@ -5,6 +5,7 @@
 
 import axios from 'axios'
 
+const BASE_URL = "https://school-itc.herokuapp.com/api"
 
 // ---- LOGIN ----
 
@@ -12,11 +13,17 @@ export const LOG_IN_INIT = "LOG_IN_INIT"
 export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS"
 export const LOG_IN_FAILURE = "LOG_IN_FAILURE"
 
-// loginUser: Obj -> (x -> void) -> void
+
 export const loginUser = (userInfo) => (dispatch) => {
     dispatch({ type: SIGN_UP_INIT })
+
+    console.log('right here', userInfo)
     
-    axios.post("https://school-itc.herokuapp.com/api/accounts/login", userInfo)
+    axios.post(
+        `${BASE_URL}/accounts/login`, 
+        JSON.stringify(userInfo), 
+        {"Content-Type": "application/json"}
+    )
     .then(res => {
         localStorage.setItem("school-in-the-cloud-auth-key", res.data.token)
          dispatch({
@@ -40,11 +47,12 @@ export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS"
 export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE"
 
 
-// registerUser:  Obj -> (x -> void) -> void
 export const registerUser = (userInfo) => (dispatch) => {
     dispatch({ type: SIGN_UP_INIT })
 
-    axios.post("https://school-itc.herokuapp.com/api/accounts/register", userInfo)
+    console.log(userInfo)
+
+    axios.post(`${BASE_URL}/accounts/register`, JSON.stringify(userInfo))
     .then(res => {
         dispatch({ type: SIGN_UP_SUCCESS })
     })
