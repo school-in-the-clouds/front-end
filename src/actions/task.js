@@ -145,7 +145,23 @@ export const EDIT_TASK_FAILURE = "EDIT_TASK_FAILURE"
 
 export const editTask = curry((authToken, task) => (dispatch) => {
     dispatch ({ type: EDIT_TASK_INIT })
-    dispatch ({ type: EDIT_TASK_FAILURE })
+    axios.put(
+        `https://school-itc.herokuapp.com/api/tasks/${task.id}`,
+        task,
+        craftHeader(authToken)
+    )
+    .then(res => {
+        dispatch({
+            type: EDIT_TASK_SUCCESS,
+            payload: res
+        })
+    })
+    .catch(err => {
+        dispatch ({ 
+            type: EDIT_TASK_FAILURE,
+            payload: err
+        })
+    })
 })
 
 
