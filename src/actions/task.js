@@ -39,6 +39,23 @@ export const ADD_TASK_FAILURE = "ADD_TASK_FAILURE"
 
 export const addTask = curry((authToken, newTask) => (dispatch) => {
     dispatch({ type: ADD_TASK_INIT })
+    axios.post(
+        "https://school-itc.herokuapp.com/api/tasks", 
+        { newTask }, 
+        craftHeader(authToken)
+    )
+    .then(res => {
+        dispatch({
+            type: ADD_TASK_SUCCESS,
+            payload: res
+        })
+    })
+    .catch(err => {
+        dispatch({
+            type: ADD_TASK_FAILURE,
+            payload: err
+        })
+    })
 })
     
 
