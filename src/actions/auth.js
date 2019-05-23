@@ -9,25 +9,25 @@ const BASE_URL = "https://school-itc.herokuapp.com/api"
 
 // ---- LOGIN ----
 
-export const LOG_IN_INIT = "LOG_IN_INIT"
-export const LOG_IN_SUCCESS = "LOG_IN_SUCCESS"
-export const LOG_IN_FAILURE = "LOG_IN_FAILURE"
+export const LOGIN_INIT = "LOGIN_INIT"
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
+export const LOGIN_FAILURE = "LOGIN_FAILURE"
 
 
 export const loginUser = (userInfo) => (dispatch) => {
-    dispatch({ type: SIGN_UP_INIT })
+    dispatch({ type: LOGIN_INIT })
 
     axios.post(`${BASE_URL}/accounts/login`, userInfo)
     .then(res => {
         localStorage.setItem("school-in-the-cloud-auth-key", res.data.token)
          dispatch({
-            type: SIGN_UP_SUCCESS,
+            type: LOGIN_SUCCESS,
             payload: res.data.token
         })
     })
      .catch(err => { 
         dispatch({
-            type: SIGN_UP_FAILURE, 
+            type: LOGIN_FAILURE, 
             payload: err 
         })
     })
