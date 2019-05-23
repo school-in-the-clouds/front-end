@@ -17,13 +17,7 @@ export const LOG_IN_FAILURE = "LOG_IN_FAILURE"
 export const loginUser = (userInfo) => (dispatch) => {
     dispatch({ type: SIGN_UP_INIT })
 
-    console.log('right here', userInfo)
-    
-    axios.post(
-        `${BASE_URL}/accounts/login`, 
-        JSON.stringify(userInfo), 
-        {"Content-Type": "application/json"}
-    )
+    axios.post(`${BASE_URL}/accounts/login`, userInfo)
     .then(res => {
         localStorage.setItem("school-in-the-cloud-auth-key", res.data.token)
          dispatch({
@@ -50,11 +44,12 @@ export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE"
 export const registerUser = (userInfo) => (dispatch) => {
     dispatch({ type: SIGN_UP_INIT })
 
-    console.log(userInfo)
-
-    axios.post(`${BASE_URL}/accounts/register`, JSON.stringify(userInfo))
+    axios.post(`${BASE_URL}/accounts/register`, userInfo)
     .then(res => {
-        dispatch({ type: SIGN_UP_SUCCESS })
+        dispatch({ 
+            type: SIGN_UP_SUCCESS,
+            payload: res.data
+         })
     })
     .catch(err => { 
         dispatch({
