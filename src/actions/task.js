@@ -41,7 +41,7 @@ export const addTask = curry((authToken, newTask) => (dispatch) => {
     dispatch({ type: ADD_TASK_INIT })
     axios.post(
         "https://school-itc.herokuapp.com/api/tasks", 
-        { newTask }, 
+        newTask, 
         craftHeader(authToken)
     )
     .then(res => {
