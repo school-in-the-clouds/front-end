@@ -1,4 +1,4 @@
-import LoginForm from '../ui/LoginForm'
+import LoginForm from '../presentational/LoginForm'
 import { loginUser } from '../../actions'
 import { connect } from 'react-redux'
 

@@ -4,9 +4,9 @@ import { Route } from 'react-router-dom';
 import './App.css';
 import logo from './assets/img/school-in-the-cloud-logo.png'
 
-import Prompt from './components/ui/Prompt.jsx'
-import ProfileCard from './components/ui/ProfileCard.jsx'
-import Nav from './components/ui/Nav.jsx'
+import Prompt from './components/presentational/Prompt.jsx'
+import ProfileCard from './components/presentational/ProfileCard.jsx'
+import Nav from './components/presentational/Nav.jsx'
 import SignUpForm from './components/containers/SignUpForm'
 import LoginForm from './components/containers/LoginForm'
 

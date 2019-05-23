@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { registerUser } from '../../actions'
-import SignUpForm from '../ui/SignUpForm'
+import SignUpForm from '../presentational/SignUpForm'
 
 function mapStateToProps(state) {
     return state.auth
