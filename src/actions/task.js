@@ -191,7 +191,6 @@ export const markComplete = curry((authToken, task) => (dispatch) => {
             payload: err
         })
     })
-    dispatch({ type: MARK_COMPLETE_FAILURE })
 })
 
 
