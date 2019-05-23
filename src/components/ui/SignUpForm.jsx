@@ -1,57 +1,94 @@
-import React, { useState } from 'react'
+import React, { Component } from 'react'
 
-export default function SignUpForm(props) {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+// local form state
+const initialState = {
+    username: '',
+    password: '',
+    name: '',
+    role: '',
+    email: '',
+    country: '',
+    phone: '',
+}
 
-
-    const handleSubmit = (e) => {
+export default class SignUpForm extends Component {
+    state = initialState
+    
+    handleSubmit = (e) => {
         e.preventDefault()
-        // use useEffect to make POST request to register/login route 
-        // props.dispatch({ type: NewUser, payload: { email, password } })
 
+        // TODO: grab auth token off context, not props
+        this.props.registerUser(this.props.authToken, this.state)
+        
         // reset fields
-        setEmail('')
-        setPassword('')
-        return {
-            email,
-            password
-        }
-      
+        this.setState(initialState)
     }
 
-    const handleChange = (field) => (e) => {
-        switch(field) {
-            case 'email':
-                setEmail(e.target.value)
-                break
-            case 'password':
-                setPassword(e.target.value)
-                break
-            default: 
-                console.warn('could not handle change for', e.target.value)
-        }
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name]: [e.target.value]
+        })
     }
     
-    return (
-        <form 
-            className="sign-up"
-            onSubmit={handleSubmit}
-        >
-            <input 
-                name="email"
-                value={email} 
-                placeholder={"email"} 
-                onChange={handleChange("email")} 
-            />
-            <input 
-                name="password"
-                value={password} 
-                placeholder={"password"} 
-                onChange={handleChange("password")} 
-            />
-            <button role="submit">Sign Up</button>
-        </form>
+    render() {
+        return (
+            <form 
+                className="sign-up"
+                onSubmit={this.handleSubmit}
+            >
+                <input 
+                    name="username"
+                    value={this.state.username} 
+                    placeholder={"username"} 
+                    onChange={this.handleChange} 
+                    required
+                />
+                <input 
+                    name="password"
+                    value={this.state.password} 
+                    placeholder={"password"} 
+                    onChange={this.handleChange} 
+                    required
+                />
+                <input 
+                    name="name"
+                    value={this.state.name} 
+                    placeholder={"name"} 
+                    onChange={this.handleChange} 
+                    required
+                />
+                <input 
+                    name="email"
+                    value={this.state.email} 
+                    placeholder={"email"} 
+                    onChange={this.handleChange} 
+                    required
+                />
+                <input 
+                    name="role"
+                    value={this.state.role} 
+                    placeholder={"role"} 
+                    onChange={this.handleChange} 
+                    required
+                />
+                <input 
+                    name="country"
+                    value={this.state.country} 
+                    placeholder={"country"} 
+                    onChange={this.handleChange} 
+                    required
+                />
+                <input 
+                    name="phone"
+                    value={this.state.phone} 
+                    placeholder={"phone"} 
+                    onChange={this.handleChange} 
+                    required
+                />
 
-    )
+                <button role="submit">Sign Up</button>
+            </form>
+        )
+    }
+    
 }

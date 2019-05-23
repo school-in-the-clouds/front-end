@@ -1,18 +1,18 @@
+import LoginForm from '../ui/LoginForm'
+import { loginUser } from '../../actions'
 import { connect } from 'react-redux'
-import { registerUser } from '../../actions'
-import SignUpForm from '../ui/SignUpForm'
 
 function mapStateToProps(state) {
     return state.auth
 }
 
 function mapDispatchToProps() {
-    return {
-        registerUser
+    return { 
+        loginUser 
     }
 }
 
 export default connect(
     mapStateToProps, 
     mapDispatchToProps()
-)(SignUpForm)
+)(LoginForm)
