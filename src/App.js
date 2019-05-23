@@ -5,9 +5,10 @@ import './App.css';
 import logo from './assets/img/school-in-the-cloud-logo.png'
 
 import Prompt from './components/ui/Prompt.jsx'
-import SignUpForm from './components/ui/SignUpForm.jsx'
 import ProfileCard from './components/ui/ProfileCard.jsx'
 import Nav from './components/ui/Nav.jsx'
+import SignUpForm from './components/containers/SignUpForm'
+import LoginForm from './components/containers/LoginForm'
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
         path="/" 
         render={props => <Prompt message="Home" {...props} />}
       />
-      <Route path="/login" component={SignUpForm}/>
+      <Route path="/login" component={LoginForm}/>
+      <Route path="/signup" component={SignUpForm} />
       <Route path="/about" component={ProfileCard}/>
       <Route 
         path="/contact" 

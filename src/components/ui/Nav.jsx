@@ -8,7 +8,8 @@ export default function Nav(props) {
             <NavLink to="/">
                 <img src={props.logo || "#"} alt="Logo" />
             </NavLink>
-            <NavLink to="/login">SignUp/Login</NavLink>
+            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/signup">Sign Up</NavLink>
             <NavLink to="/about">About</NavLink>
             <NavLink to="/contact">Contact</NavLink>
         </nav>
