@@ -223,5 +223,5 @@ function craftHeader(authToken, ...extraHeaders) {
         authorization: authToken,
     }
     
-    return Object.assign({}, boilerplate, ...extraHeaders)
+    return Object.assign({}, boilerplate, ...extraHeaders || {})
 }
