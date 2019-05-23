@@ -42,9 +42,11 @@ export const SIGN_UP_FAILURE = "SIGN_UP_FAILURE"
 // registerUser:  Obj -> (x -> void) -> void
 export const registerUser = (userInfo) => (dispatch) => {
     dispatch({ type: SIGN_UP_INIT })
-    
+
     axios.post("https://school-itc.herokuapp.com/api/accounts/register", userInfo)
     .then(res => {
+        localStorage.setItem("school-in-the-cloud-auth-key", res.data.token)
+        
         dispatch({
             type: SIGN_UP_SUCCESS,
             payload: res
