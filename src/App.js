@@ -4,10 +4,10 @@ import { Route } from 'react-router-dom';
 import './App.css';
 import logo from './assets/img/school-in-the-cloud-logo.png'
 
-import Prompt from './components/presentational/Prompt.jsx'
-import Nav from './components/containers/Nav'
-import SignUpForm from './components/containers/SignUpForm'
-import LoginForm from './components/containers/LoginForm'
+import Prompt from './components/views/jsx/Prompt.jsx.js.js.js'
+import Nav from './components/views/containers/Nav'
+import SignUpForm from './components/views/containers/SignUpForm'
+import LoginForm from './components/views/containers/LoginForm'
 
 function App() {
   return (
